@@ -1,0 +1,157 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define max  3
+/* cadastro de duas pessoas aluno e pai do aluno */
+
+// FUNÇÕES
+void menu();
+void cadastroProduto();
+void cadastroCliente();
+void listarProduto();
+void listarCliente();
+void buscaProduto();
+
+//ESTRUTURAS
+struct
+{
+	int idproduto;
+	char nomeProduto[22];
+	float precoProduto;	
+} produto[max];
+struct
+{
+	int idCliente;
+	char nomeCliente[22];
+	float valorCompra;
+} cliente[max]; 
+// variaveis globais
+	int op, auxQtd=0, auxQtdCliente=0;
+	int aux,i;
+	
+int main() {
+	
+	do
+	{
+		menu();
+		scanf("%i",&op);
+		system("cls");
+		switch(op)
+		{
+			case 1:
+				cadastroProduto();
+			break;
+			case 2:
+				cadastroCliente();
+			break;
+			case 3:
+				listarProduto();
+			break;					
+			case 4:
+				listarCliente();
+			break;
+			case 5:
+				buscaProduto();
+				
+		}	
+	}while(op != 0);
+
+	return 0;
+} 
+
+// Função de menu
+void menu()
+{
+	printf(" digite a opcao:\n");
+	printf("1 = Cadastro Produto\n");
+	printf("2 = Cadastro Cliente\n");
+	printf("3 = Listar produtos\n");
+	printf("4 = Listar Clientes\n");
+	printf("5 = Buscar Cliente ou Produto\n");
+	printf("0 = sair\n");
+
+}
+
+// Função para cadastro de produto
+void cadastroProduto()
+{
+	if (auxQtd < max)
+	{
+		printf("Digite o id do produto:\n");
+		scanf("%i",&produto[auxQtd].idproduto);
+		printf("Digite o nome do produto\n");
+		fflush(stdin);
+  		gets(produto[auxQtd].nomeProduto);
+  		printf("Digite o valor do produto\n");
+  		scanf("%f",&produto[auxQtd].precoProduto);
+  		auxQtd++;
+  		system("cls");
+  	}else
+  		{
+  			printf("Quantidade maxima tente outra hora\n");
+  			system("pause");
+			system("cls");				
+		}
+}
+
+// Função para cadastro de cliente
+void cadastroCliente()
+{
+	if (auxQtdCliente < max)
+	{
+		printf ("Digite o id do cliente:\n ");
+		scanf("%i",&cliente[auxQtdCliente].idCliente);
+		printf("Digite o nome do cliente:\n");
+		fflush(stdin);
+		gets(cliente[auxQtdCliente].nomeCliente);
+		printf("Digite o valor gasto:\n");
+		scanf("%f",&cliente[auxQtdCliente].valorCompra);
+		auxQtdCliente++;
+		system("cls");
+	}else
+		{
+			printf("Numero de cliente esta no maximo\n");
+			system("pause");
+			system("cls");	
+		}
+}
+
+//Função para apresentar valores do vetor de Produto
+void listarProduto()
+{
+	printf("_________Lista de Produto_________");
+	for (i=0; i<auxQtd; i++)
+	{
+	
+		printf("\nID do Produto:%i\nNome do Produto:%s\nValor do Produto:%.2f\n___________\n",produto[i].idproduto, produto[i].nomeProduto, produto[i].precoProduto);
+	}
+	system("pause");
+	system("cls");
+}
+
+//Função para apresentar valores do vetor de Cliente.
+void listarCliente()
+{
+	printf("_________Lista de Clientes_________\n");
+	for (i=0; i<auxQtdCliente; i++)
+	{
+	
+		printf("\nID do Cliente:%i\nNome do Cliente:%s\nValor da compra:%.2f\n___________\n",cliente[i].idCliente, cliente[i].nomeCliente, cliente[i].valorCompra);
+	}
+	system("pause");
+	system("cls");	
+}
+
+// Função busca produto
+void buscaProduto()
+{
+	int busca;
+	printf("Digite o ID do produto:\n");
+	scanf("%i",&busca);
+	for(i=0; i<auxQtd;i++)
+	{
+		if(busca==produto[i].idproduto)
+		{
+			printf("\nID do Produto:%i\nNome do Produto:%s\nValor do Produto:%.2f\n___________\n",produto[i].idproduto, produto[i].nomeProduto, produto[i].precoProduto);
+		}
+	}
+}
